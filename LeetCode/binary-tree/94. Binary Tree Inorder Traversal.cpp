@@ -33,3 +33,34 @@ class Solution {
             }
         }
 };
+
+//Morris traversal
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> output;
+        while (root != nullptr){
+            if (root->left == nullptr){
+                output.push_back(root->val);
+                root = root->right;
+            }
+            else{
+                TreeNode* pre = root->left;
+                while (pre->right != nullptr && pre->right != root){
+                    pre = pre->right;
+                }
+                if (pre->right == nullptr){
+                    pre->right = root;
+                    root = root->left;
+                }
+                else { //since it is out of the loop
+                    //if pre->right still !=null, then pre-right must = root
+                    pre->right = nullptr;
+                    output.push_back(root->val);
+                    root = root->right;
+                }
+            }
+        }
+    return output;
+    }
+};

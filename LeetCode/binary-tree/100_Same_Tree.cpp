@@ -32,4 +32,18 @@ public:
             return false;
         return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
     }
+
+    //my second solution 
+     bool isSameTree(TreeNode* p, TreeNode* q) {
+        //checking whether q and p are the same in turns of 
+        //the being null or not
+        if (p==NULL || q==NULL)
+            return (p==q);
+        //chekcing whether the val is the same
+        if (p->val != q->val)
+            return false;
+        
+        //recursively finding in both right and left
+        return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+    }
 };

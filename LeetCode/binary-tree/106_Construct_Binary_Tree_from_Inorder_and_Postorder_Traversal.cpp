@@ -16,7 +16,8 @@ struct TreeNode {
 
 //my oringinal solution: I think it should be able to run on leetcode but somehow it caont
 //still dont figure out the reason why
-//will try to figure out 
+//will try to figure out
+//sry i solved it in 1 min...... 
 class Solution {
     public:
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
@@ -37,8 +38,14 @@ class Solution {
            
         rootIndex--;
         TreeNode* root= new TreeNode (in[pivot]);
-        root->left = build(in, post, rootIndex, left, pivot-1);
+        
         root->right = build(in, post, rootIndex, pivot+1,right);
+        root->left = build(in, post, rootIndex, left, pivot-1); 
+        //we need to construct the right sub-tree first since for post[rootIndex-1] is the one on the right subtree
+
+        /* my original
+        root->left = build(in, post, rootIndex, left, pivot-1);
+        root->right = build(in, post, rootIndex, pivot+1,right);*/
         
         return root; 
     }

@@ -14,10 +14,10 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+//a cheating solution which may not be accepted during interview lol....
 class Solution {
 public:
-
-    //a cheating solution which may not be accepted during interview lol....
     vector<vector<int>> ans;
     vector<vector<int>> levelOrderBottom(TreeNode* root) {
         int depth=0;
@@ -40,3 +40,33 @@ public:
             
     }
 };
+
+class Solution {
+public:
+    
+    vector<vector<int>> levelOrderBottom(TreeNode* root) {
+        int depth = dep(root);
+        //initialize the vector with enough space for each level
+        vector<vector<int>> ans(depth, vector<int>{});
+        //here we need depth-1 since in the later function depth are use as the vector index
+        build (root, depth-1, ans);
+        return ans;
+    }
+    
+    void build(TreeNode* root, int depth, vector<vector<int>>& ans){
+        if (root==NULL)
+            return;
+        ans[depth].push_back(root->val);
+        //build left subtree first since the problem require from left to right
+        build(root->left, depth-1, ans);
+        build(root->right, depth-1, ans);
+    }
+    
+    int dep(TreeNode* root){
+        if (root==NULL)
+            return 0;
+        return max(dep(root->left),dep(root->right))+1;
+    }
+    
+};
+

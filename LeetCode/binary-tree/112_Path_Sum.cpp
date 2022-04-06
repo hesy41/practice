@@ -29,3 +29,16 @@ public:
         return (find(root->left,target,ans)||find(root->right,target, ans));
     }
 };
+
+//second solution 
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int targetSum) {
+        if (!root)
+            return false;
+        if(targetSum==root->val&& !root->left && !root->right)
+            return true;
+      
+        return hasPathSum(root->right, targetSum-root->val)||hasPathSum(root->left, targetSum-root->val);
+    }
+};

@@ -30,3 +30,27 @@ public:
         build(root->right, ans);
     }
 };
+
+//iterative solution
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        stack<TreeNode*> stack;
+        vector<int> ans;
+        if (!root)
+            return ans;
+        stack.push(root);
+        while(!stack.empty())
+        {
+            TreeNode* node=stack.top();
+            stack.pop();
+            if (node->right)
+                stack.push(node->right);
+            if(node->left)
+                stack.push(node->left);
+            ans.push_back(node->val);
+        }
+        return ans;
+    }
+    
+};

@@ -12,3 +12,29 @@ public:
         return;
     }
 };
+
+//solution 2
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int fi=0, hi=nums.size()-1, mi=0;
+        while(mi <= hi)
+        {
+            if(nums[mi] == 0)
+            {
+                swap(nums[mi], nums[fi]);
+                mi++;
+                fi++;
+            }
+            else if(nums[mi]==1)
+                mi++;
+            else if(nums[mi] ==2)
+            {
+                swap(nums[mi], nums[hi]);
+                hi--;
+            }
+        }
+        return;
+    }
+};

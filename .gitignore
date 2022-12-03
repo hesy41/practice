@@ -1,1 +1,4 @@
 venv
+
+#ignore setting.py that contains Django key
+Django-learning/mysite/mysite/settings.py

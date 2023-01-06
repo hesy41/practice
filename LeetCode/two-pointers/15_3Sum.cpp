@@ -45,3 +45,49 @@ public:
         
     }
 };
+
+//attempt Jan 5 2023
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> res;
+        if (nums.empty())
+            return res;
+
+        sort(nums.begin(), nums.end());
+        int size = nums.size();
+        if (size < 3)
+            return res;
+
+        for (int i =0; i < size; i++)
+        {
+            if(nums[i] > 0)
+                break;
+
+            if (i > 0 && nums[i] == nums[i-1])
+                continue;
+
+            int target = 0 - nums[i];
+            int lo = i+1;
+            int hi = size -1;
+
+            while(lo < hi)
+            {
+                if (nums[lo] + nums[hi] > target)
+                    hi--;
+                else if (nums[lo] + nums[hi] < target)
+                    lo++;
+                else
+                {
+                    res.push_back({nums[i], nums[lo], nums[hi]});
+                    int last_lo = nums[lo], last_hi = nums[hi];
+                    while(lo < hi && nums[lo] == last_lo)
+                        lo++;
+                    while(lo < hi && nums[hi] == last_hi)
+                        hi--;
+                }
+            }
+        }
+        return res;
+    }
+};
